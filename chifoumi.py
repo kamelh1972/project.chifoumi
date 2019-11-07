@@ -34,8 +34,16 @@ def augmenter_scores(mon_coup,ton_coup):
 ton_score = 0
 mon_score = 0
 fin = 3
-print(input("enter your usename"))
-print ("pierre-feuille-ciseau.Le premier arrivé à ",fin,"à gagné")
+while True:
+    try:
+        pseudo = input("enter your Pseudo please")
+        if pseudo.isalpha() and len(pseudo) < 10:
+            break
+    except:
+            pass
+    print("votre Pseudo doit avoir moins de 10 lettres et ne comporter que des lettres")
+print(pseudo)
+print ("choisissez entre pierre-feuille-ciseau.Le premier arrivé à ",fin,"à gagné")
 manche = 0
 while mon_score < fin and ton_score < fin:
     ton_coup = int (input ( "1 : pierre, 2 : feuille, 3 : ciseau "))
@@ -44,8 +52,23 @@ while mon_score < fin and ton_score < fin:
     print("vous choisissez",end=" ")
     choisir(ton_coup)
     mon_coup = randint(1, 3)
-    print("- Je montre", end=" ")
+    print("- Je choisis", end=" ")
     choisir(mon_coup)
     print()
+    if mon_coup == 1 and ton_coup == 2:
+        print("vous gagnez")
+    elif mon_coup == 2 and ton_coup == 1:
+        print ("vous perdez")
+    elif mon_coup == 1 and ton_coup == 3:
+        print ("vous perdez")
+    elif mon_coup == 3 and ton_coup == 1:
+        print ("vous gagnez")
+    elif mon_coup == 3 and ton_coup == 2:
+        print( "vous perdez")
+    elif mon_coup == 2 and ton_coup == 3:
+        print("vous gagnez")
+    else:
+        print("egalité")
+
     augmenter_scores(mon_coup, ton_coup)
-    print("vous",ton_score, "   moi",mon_score)
+    print("vous",ton_score, "   computer",mon_score)
