@@ -30,7 +30,11 @@ def augmenter_scores(mon_coup,ton_coup):
     elif mon_coup == 2 and ton_coup == 3:
         ton_score +=1
 
+
+
 ####deroulement de la partie
+
+
 ton_score = 0
 mon_score = 0
 fin = 3
