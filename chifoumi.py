@@ -6,73 +6,78 @@
 
 from random import randint
 
-def choisir (nombre):
-    if nombre == 1:
+def choisir (number):
+    if number == 1:
         print("pierre", end =' ')
-    elif nombre == 2:
+    elif number == 2:
         print("feuille", end =' ')
     else:
         print("ciseau", end =' ')
 
 ###metrre a jour les scores des joueurs
-def augmenter_scores(mon_coup,ton_coup):
-    global mon_score,ton_score
-    if mon_coup == 1 and ton_coup == 2:
-        ton_score += 1
-    elif mon_coup == 2 and ton_coup == 1:
-        mon_score += 1
-    elif mon_coup == 1 and ton_coup == 3:
-        mon_score += 1
-    elif mon_coup == 3 and ton_coup == 1:
-        ton_score += 1
-    elif mon_coup == 3 and ton_coup == 2:
-        mon_score += 1
-    elif mon_coup == 2 and ton_coup == 3:
-        ton_score +=1
+def augmenter_scores(player_choice,computer_choice):
+    global player_score,computer_score
+    if player_choice == 1 and computer_choice == 2:
+        computer_score += 1
+    elif player_choice == 2 and computer_choice == 1:
+        player_score += 1
+    elif player_choice == 1 and computer_choice == 3:
+        player_score += 1
+    elif player_choice == 3 and computer_choice == 1:
+        computer_score += 1
+    elif player_choice == 3 and computer_choice == 2:
+        player_score += 1
+    elif player_choice == 2 and computer_choice == 3:
+        computer_score +=1
 
 
 
 ####deroulement de la partie
+continuer = True
+while continuer:
+    computer_score = 0
+    player_score = 0
+    fin = 3
+    while True:
+        try:
+            pseudo = input("enter your Pseudo please")
+            if pseudo.isalpha() and len(pseudo) < 10:
+                break
+        except:
+                pass
+        print("votre Pseudo doit avoir moins de 10 lettres et ne comporter que des lettres")
+    print(pseudo)
+    print ("choisissez entre pierre-feuille-ciseau.Le premier arrivé à ",fin,"à gagné")
+    manche = 0
+    while player_score < fin and computer_score < fin:
+        computer_choice = int (input ( "1 : pierre, 2 : feuille, 3 : ciseau "))
+        while computer_choice < 1 or computer_choice > 3:
+            computer_choice = int(input("1 : pierre, 2 : feuille, 3 : ciseau"))
 
+        print("vous choisissez",end=" ")
+        choisir(computer_choice)
+        player_choice = randint(1, 3)
+        print("- Je choisis", end=" ")
+        choisir(player_choice)
+        print()
+        if player_choice == 1 and computer_choice == 2:
+            print("vous gagnez")
+        elif player_choice == 2 and computer_choice == 1:
+            print ("vous perdez")
+        elif player_choice == 1 and computer_choice == 3:
+            print ("vous perdez")
+        elif player_choice == 3 and computer_choice == 1:
+            print ("vous gagnez")
+        elif player_choice == 3 and computer_choice == 2:
+            print( "vous perdez")
+        elif player_choice == 2 and computer_choice == 3:
+            print("vous gagnez")
+        else:
+            print("egalité")
 
-ton_score = 0
-mon_score = 0
-fin = 3
-while True:
-    try:
-        pseudo = input("enter your Pseudo please")
-        if pseudo.isalpha() and len(pseudo) < 10:
-            break
-    except:
-            pass
-    print("votre Pseudo doit avoir moins de 10 lettres et ne comporter que des lettres")
-print(pseudo)
-print ("choisissez entre pierre-feuille-ciseau.Le premier arrivé à ",fin,"à gagné")
-manche = 0
-while mon_score < fin and ton_score < fin:
-    ton_coup = int (input ( "1 : pierre, 2 : feuille, 3 : ciseau "))
-    while ton_coup < 1 or ton_coup > 3:
-        ton_coup = int(input("1 : pierre, 2 : feuille, 3 : ciseau"))
-    print("vous choisissez",end=" ")
-    choisir(ton_coup)
-    mon_coup = randint(1, 3)
-    print("- Je choisis", end=" ")
-    choisir(mon_coup)
-    print()
-    if mon_coup == 1 and ton_coup == 2:
-        print("vous gagnez")
-    elif mon_coup == 2 and ton_coup == 1:
-        print ("vous perdez")
-    elif mon_coup == 1 and ton_coup == 3:
-        print ("vous perdez")
-    elif mon_coup == 3 and ton_coup == 1:
-        print ("vous gagnez")
-    elif mon_coup == 3 and ton_coup == 2:
-        print( "vous perdez")
-    elif mon_coup == 2 and ton_coup == 3:
-        print("vous gagnez")
-    else:
-        print("egalité")
+        augmenter_scores(player_choice, computer_choice)
+        print("vous",computer_score, "   computer",player_score)
 
-    augmenter_scores(mon_coup, ton_coup)
-    print("vous",ton_score, "   computer",mon_score)
+    choix = input("Voulez vous continuer ? ")
+    if choix not in ('o', 'oui', 'ok'):
+        continuer = False
